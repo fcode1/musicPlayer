@@ -1,0 +1,34 @@
+npm install
+
+1. 入口，在当前环境下 --> npm init ---->生成(package.json)
+
+2. 全局安装gulp  --->npm/cnpm install gulp -g
+   引入gulp:var gulp = require("gulp");
+
+3. 在当前开发环境下安装---->npm/cnpm install gulp --save-dev  (开发时的依赖)
+    --->生成node_modules文件夹(发送时可删除，保留package.json文件即可，执行npm/cnpm install 命令即可再次部署)
+
+4. npm/cnpm install jquery --save 安装运行时的jquery依赖
+
+5 . gulp images 转移图片文件--->转移到build文件夹下
+
+5.1. 安装图片压缩插件  ---->npm/cnpm install gulp-imagemin --save-dev (开发环境下)
+    引入插件：var imagemin = require("gulp-imagemin");
+    作用插件：.pipe(imagemin());
+    执行命令：gulp images
+
+5.2. 检测文件是否时新传入的，只有新文件才进行压缩：
+    安装插件--->npm/cnpm install gulp-newer --save-dev
+    引入插件--->var newer=require("gulp-newer");
+    作用插件--->.pipe(newer(folder.build + "images"));
+    执行命令：gulp images-->没新文件时不压缩
+
+6. gulp html 转移html文件 
+
+6.1 安装html压缩插件--->npm/cnpm install gulp-htmlclean --save-dev
+     引入插件：var htmlClean = require("gulp-htmlclean");
+     作用插件：.pipe(htmlClean());
+     执行命令：gulp html
+
+7.执行全部任务：-->gulp 一下即可
+     配置： gulp.task("default", ["html", "images"], function() {})
